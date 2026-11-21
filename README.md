@@ -12,7 +12,7 @@ My personal portfolio: projects, experience, recommendations and a little about 
 - Recommendations section, photo gallery with a lightbox, and scroll-reveal animations
 - Floating WhatsApp button and one-click email copy
 - Fully responsive, from desktop down to small phones
-- Contact form powered by Netlify Forms, with an email fallback
+- Contact page with email and WhatsApp buttons
 - One HTML file with no frameworks and no build step
 
 ## Tech
