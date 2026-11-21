@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manar Altumah — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff; --paper:#fbfaf8; --ink:#141414; --soft:#5d5a55; --faint:#8f8a83;
+    --line:#e9e5df; --gold:#b08d57; --gold-2:#d4b98a; --gold-deep:#8a6a3b;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Manrope',system-ui,sans-serif;
+    --marble:url("marble.jpg");
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  body{overflow-x:hidden;background:var(--white);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  @media (max-width:640px){.wrap{padding:0 20px}}
+
+  /* nav */
+  nav{position:fixed;inset:0 0 auto 0;z-index:20;transition:background .3s,box-shadow .3s}
+  nav.scrolled{background:rgba(255,255,255,.88);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:78px}
+  .mono{display:flex;align-items:center;gap:12px}
+  .mono i{width:44px;height:44px;font-family:var(--serif);font-style:normal;font-size:18px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold-deep);background:var(--marble) center/300px}
+  .mono b{font-family:var(--serif);font-weight:500;font-size:21px;letter-spacing:.02em}
+  nav ul{display:flex;gap:34px;list-style:none;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase}
+  nav ul a{color:var(--soft);transition:color .2s} nav ul a:hover{color:var(--gold-deep)}
+  .navbtn{font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:11px 22px;border:1px solid var(--ink);transition:.25s}
+  .navbtn:hover{background:var(--ink);color:#fff}
+  @media (max-width:900px){nav ul{display:none}}
+
+  /* hero */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;background:var(--marble) center/cover;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,255,255,.92) 0%,rgba(255,255,255,.7) 45%,rgba(255,255,255,0) 100%)}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;width:100%}
+  .kicker{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);display:flex;align-items:center;gap:14px}
+  .kicker::before{content:"";width:46px;height:1px;background:var(--gold)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.3vw,90px);line-height:1;white-space:nowrap;letter-spacing:-.01em;margin:26px 0 22px}
+  h1 em{font-style:italic;color:var(--gold-deep);font-weight:400}
+  .role{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.2vw,26px);color:var(--soft)}
+  .lede{margin-top:22px;max-width:52ch;color:var(--soft);font-size:16.5px;font-weight:300}
+  .ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink);transition:.3s;cursor:pointer;background:none;font-family:var(--sans);color:var(--ink)}
+  .btn.dark{background:var(--ink);color:#fff}
+  .btn.dark:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
+  .btn:not(.dark):hover{background:var(--ink);color:#fff}
+  .btn.gold{background:linear-gradient(120deg,#c9a96e,#a8834c);border-color:transparent;color:#fff}
+  .btn.gold:hover{filter:brightness(1.07)}
+
+  .portrait{position:relative;justify-self:center;width:min(380px,100%)}
+  .arch{position:relative;aspect-ratio:4/5;border-radius:999px 999px 6px 6px;overflow:hidden;box-shadow:0 40px 80px -30px rgba(40,30,15,.35)}
+  .arch img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+  .portrait::before{content:"";position:absolute;inset:-14px;border:1px solid var(--gold);border-radius:999px 999px 10px 10px;pointer-events:none}
+  .badge{position:absolute;left:-34px;bottom:44px;background:#fff;padding:16px 22px;box-shadow:0 18px 40px -18px rgba(0,0,0,.25);border-left:2px solid var(--gold)}
+  .badge b{font-family:var(--serif);font-size:30px;font-weight:500;display:block;line-height:1}
+  .badge span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  @media (max-width:520px){h1{white-space:normal}}
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;gap:56px}
+    .portrait{order:-1;width:min(280px,80%)}
+    .badge{left:-12px;bottom:-22px;padding:12px 18px}.badge b{font-size:24px}
+  }
+
+  .stats{background:var(--ink);color:#fff}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stats div div{padding:34px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.1)}
+  .stats div div:last-child{border:none}
+  .stats b{font-family:var(--serif);font-weight:400;font-size:42px;color:var(--gold-2);display:block;line-height:1.1}
+  .stats span{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  @media (max-width:700px){.stats .wrap{grid-template-columns:1fr 1fr}.stats div div:nth-child(2){border:none}}
+
+  /* sections */
+  section{padding:120px 0;position:relative}
+  .head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:64px;flex-wrap:wrap}
+  .head .num{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:20px}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(42px,5.4vw,66px);line-height:1;margin-top:8px}
+  h2 em{font-style:italic;color:var(--gold-deep)}
+  .head p{max-width:40ch;color:var(--soft);font-weight:300}
+  .alt{background:var(--paper)}
+  .veined{background:var(--marble) center/cover}
+  .veined::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.55)}
+  .veined > .wrap{position:relative}
+
+  /* featured projects */
+  .feature{display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:center;margin-bottom:120px}
+  .feature:nth-of-type(even){grid-template-columns:1fr 1.25fr}
+  .feature:nth-of-type(even) .shot{order:2}
+  @media (max-width:900px){.feature,.feature:nth-of-type(even){grid-template-columns:1fr;gap:34px}.feature:nth-of-type(even) .shot{order:0}}
+  .shot{position:relative;display:block;group:1}
+  .shot::after{content:"";position:absolute;inset:26px -26px -26px 26px;background:var(--marble) center/cover;z-index:-1;border:1px solid var(--line)}
+  .browser{background:#fff;border:1px solid var(--line);box-shadow:0 30px 70px -30px rgba(30,25,15,.35);overflow:hidden;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
+  .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:#faf9f7}
+  .bar i{width:9px;height:9px;border-radius:50%;background:#e2ddd5}
+  .bar span{margin-left:12px;font-size:11.5px;color:var(--faint);background:#fff;border:1px solid var(--line);padding:3px 14px;border-radius:20px;flex:1;max-width:260px}
+  .browser img{aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .hint{position:absolute;inset:auto 0 0 0;top:41px;display:grid;place-items:center;background:rgba(20,20,20,.0);transition:.4s}
+  .hint em{font-style:normal;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#fff;background:var(--ink);padding:13px 24px;opacity:0;transform:translateY(10px);transition:.4s}
+  .shot:hover .browser{transform:translateY(-8px);box-shadow:0 44px 90px -34px rgba(30,25,15,.45)}
+  .shot:hover img{transform:scale(1.035)}
+  .shot:hover .hint{background:rgba(20,20,20,.18)}
+  .shot:hover .hint em{opacity:1;transform:none}
+
+  .meta{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
+  .feature h3{font-family:var(--serif);font-weight:500;font-size:44px;line-height:1.05;margin:12px 0 16px}
+  .feature p{color:var(--soft);font-weight:300}
+  .points{list-style:none;margin:22px 0 0}
+  .points li{padding:11px 0 11px 28px;border-top:1px solid var(--line);position:relative;font-size:15px;color:#2f2d2a}
+  .points li::before{content:"";position:absolute;left:2px;top:21px;width:12px;height:1px;background:var(--gold)}
+  .points li b{font-weight:600}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px}
+  .tags span{font-size:11.5px;letter-spacing:.06em;padding:6px 13px;border:1px solid var(--line);background:#fff;color:var(--soft)}
+
+
+  .phones{position:relative;height:520px;display:flex;justify-content:center;align-items:center}
+  .phone{position:absolute;width:210px;border-radius:30px;padding:8px;background:#141414;box-shadow:0 30px 60px -24px rgba(30,25,15,.45);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .phone img{border-radius:23px;width:100%}
+  .phone.p1{transform:translateX(-150px) rotate(-7deg) scale(.88);z-index:1}
+  .phone.p2{z-index:2}
+  .phone.p3{transform:translateX(150px) rotate(7deg) scale(.88);z-index:1}
+  .bridge-feat:hover .p1{transform:translateX(-170px) rotate(-9deg) scale(.9)}
+  .bridge-feat:hover .p3{transform:translateX(170px) rotate(9deg) scale(.9)}
+  .phones::before{content:"";position:absolute;inset:40px 20px;background:url(marble.jpg) center/cover;border:1px solid var(--line);z-index:0}
+  @media (max-width:560px){.phones{height:400px}.phone{width:150px}.phone.p1{transform:translateX(-82px) rotate(-7deg) scale(.84)}.phone.p3{transform:translateX(82px) rotate(7deg) scale(.84)}}
+
+  /* small project cards */
+  .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+  @media (min-width:801px){.cards .card:last-child:nth-child(odd){grid-column:1/-1}}
+  @media (max-width:800px){.cards{grid-template-columns:1fr}}
+  .card{position:relative;background:#fff;border:1px solid var(--line);padding:40px 38px;transition:.4s;overflow:hidden;display:flex;flex-direction:column}
+  .card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-2));transform:scaleX(0);transform-origin:left;transition:transform .5s}
+  .card:hover{transform:translateY(-6px);box-shadow:0 30px 60px -32px rgba(30,25,15,.3)}
+  .card:hover::before{transform:scaleX(1)}
+  .card .trophy{position:absolute;right:30px;top:32px;font-family:var(--serif);font-style:italic;color:var(--gold-deep);font-size:15px}
+  .card h4{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.1;margin:10px 0 12px}
+  .card p{color:var(--soft);font-weight:300;font-size:15px;flex:1}
+  .card .tags{margin:20px 0 0}
+  .link{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--ink);border-bottom:1px solid var(--gold);padding-bottom:4px;align-self:flex-start;transition:.25s}
+  .link:hover{color:var(--gold-deep);gap:16px}
+  .link.muted{color:var(--faint);border-color:var(--line);cursor:default}
+  .link.muted:hover{gap:10px;color:var(--faint)}
+
+  /* experience */
+  .xp{border-top:1px solid var(--ink)}
+  .x{display:grid;grid-template-columns:200px 1fr 1.3fr;gap:36px;padding:36px 0;border-bottom:1px solid var(--line);transition:background .3s}
+  .x:hover{background:linear-gradient(90deg,transparent,rgba(176,141,87,.05),transparent)}
+  .x .when{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);padding-top:8px}
+  .x h4{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.15}
+  .x .org{font-size:13px;color:var(--gold-deep);letter-spacing:.06em;margin-top:6px}
+  .x p,.x ul{color:var(--soft);font-weight:300;font-size:15px}
+  .x ul{list-style:none} .x li{padding-left:18px;position:relative;margin-bottom:4px}
+  .x li::before{content:"·";position:absolute;left:4px;color:var(--gold);font-weight:700}
+  @media (max-width:860px){.x{grid-template-columns:1fr;gap:8px}}
+
+  /* skills */
+  .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .skill{background:#fff;padding:38px 34px}
+  .skill h5{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);font-weight:600;margin-bottom:16px}
+  .skill p{font-family:var(--serif);font-size:21px;line-height:1.5}
+  @media (max-width:860px){.skills{grid-template-columns:1fr 1fr}} @media (max-width:560px){.skills{grid-template-columns:1fr}}
+
+  /* credentials */
+  .creds{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+  @media (max-width:860px){.creds{grid-template-columns:1fr}}
+  .creds h3{font-family:var(--serif);font-weight:400;font-size:34px;margin-bottom:22px}
+  .cl{list-style:none}
+  .cl li{display:flex;justify-content:space-between;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .cl b{font-weight:500;font-size:15.5px;display:block}
+  .cl small{color:var(--faint);font-size:13.5px}
+  .cl em{font-style:normal;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);white-space:nowrap;padding-top:3px}
+
+  /* volunteering */
+  .vol{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media (max-width:900px){.vol{grid-template-columns:1fr 1fr}} @media (max-width:560px){.vol{grid-template-columns:1fr}}
+  .v{background:rgba(255,255,255,.9);border:1px solid var(--line);padding:30px;transition:.35s}
+  .v:hover{border-color:var(--gold-2);transform:translateY(-4px)}
+  .v .meta{font-size:11px}
+  .v h4{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.2;margin:10px 0 4px}
+  .v .org{font-size:13px;color:var(--gold-deep)}
+  .v p{color:var(--soft);font-size:14.5px;font-weight:300;margin-top:10px}
+
+
+  /* hobbies */
+  .hob{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media (max-width:860px){.hob{grid-template-columns:1fr}}
+  .h{position:relative;padding:44px 36px;border:1px solid var(--line);background:#fff;overflow:hidden;transition:.4s}
+  .h::after{content:"";position:absolute;inset:auto -40px -40px auto;width:160px;height:160px;border-radius:50%;background:var(--marble) center/400px;opacity:.9;transition:.5s}
+  .h:hover{transform:translateY(-6px);box-shadow:0 30px 60px -32px rgba(30,25,15,.3)}
+  .h:hover::after{transform:scale(1.15)}
+  .hicon{position:absolute;right:30px;top:30px;color:var(--gold);z-index:1}
+  .h .ic{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold-deep)}
+  .h h4{font-family:var(--serif);font-weight:500;font-size:32px;margin:8px 0 10px}
+  .h p{color:var(--soft);font-weight:300;font-size:15px;position:relative;z-index:1;max-width:30ch}
+
+
+  .hob2{display:grid;grid-template-columns:1.1fr 1fr;gap:24px}
+  @media (max-width:860px){.hob2{grid-template-columns:1fr}}
+  .hob2 .side{display:grid;gap:24px}
+  .hcard{position:relative;overflow:hidden;border:1px solid var(--line);background:#fff;transition:.4s}
+  .hcard:hover{box-shadow:0 30px 60px -32px rgba(30,25,15,.3)}
+  .hcard .ph{position:relative;aspect-ratio:1/1;overflow:hidden}
+  .hcard .ph img{width:100%;height:100%;object-fit:cover;object-position:center 75%;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .hcard:hover .ph img{transform:scale(1.05)}
+  .hcard .tx{padding:30px 34px 34px;position:relative}
+  .hcard .hicon{top:-34px;right:26px;background:#fff;border-radius:14px;padding:8px 10px;box-shadow:0 10px 24px -10px rgba(0,0,0,.3)}
+  .hcard h4{font-family:var(--serif);font-weight:500;font-size:32px;margin:6px 0 8px}
+  .hcard p{color:var(--soft);font-weight:300;font-size:15px}
+  .hcard .ic{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--gold-deep)}
+
+  .gal-head{display:flex;justify-content:space-between;align-items:end;margin:90px 0 30px;gap:20px;flex-wrap:wrap}
+  .gal-head h3{font-family:var(--serif);font-weight:400;font-size:40px}
+  .gal-head h3 em{font-style:italic;color:var(--gold-deep)}
+  .gal-head p{color:var(--soft);font-weight:300;font-size:15px}
+  .gal{columns:3 280px;column-gap:18px}
+  .gi{break-inside:avoid;margin:0 0 18px;position:relative;overflow:hidden;cursor:zoom-in;border:1px solid var(--line);background:#fff;padding:8px}
+  .gi img{width:100%;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s}
+  .gi:hover img{transform:scale(1.04)}
+  .gi figcaption{padding:12px 6px 4px;font-family:var(--serif);font-style:italic;font-size:17px;color:var(--ink);display:flex;justify-content:space-between;gap:10px}
+  .gi figcaption span{font-family:var(--sans);font-style:normal;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);padding-top:5px;white-space:nowrap}
+  .lb{position:fixed;inset:0;z-index:50;background:rgba(15,13,10,.88);display:none;place-items:center;padding:30px;cursor:zoom-out}
+  .lb.on{display:grid}
+  .lb img{max-width:min(1000px,92vw);max-height:84vh;box-shadow:0 30px 80px rgba(0,0,0,.5);border:6px solid #fff}
+  .lb p{color:#f3e6c9;font-family:var(--serif);font-style:italic;font-size:20px;margin-top:14px;text-align:center}
+
+
+  .fab{position:fixed;right:24px;bottom:24px;z-index:30;display:flex;align-items:center;gap:10px;padding:13px 20px 13px 16px;border-radius:999px;background:linear-gradient(120deg,#c9a96e,#a8834c);color:#fff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;box-shadow:0 14px 30px -10px rgba(120,85,35,.55);transition:.3s}
+  .fab:hover{transform:translateY(-3px);filter:brightness(1.07)}
+  @media (max-width:560px){.fab span{display:none}.fab{padding:14px}}
+
+
+  /* testimonials */
+  .tq-feature{position:relative;text-align:center;max-width:860px;margin:0 auto 70px}
+  .tq-feature .mk{font-family:var(--serif);font-size:140px;line-height:.6;color:var(--gold-2);display:block;height:60px}
+  .tq-feature blockquote{font-family:var(--serif);font-size:clamp(24px,2.8vw,34px);line-height:1.4;font-style:italic;color:var(--ink)}
+  .who{display:flex;align-items:center;gap:14px;margin-top:26px}
+  .tq-feature .who{justify-content:center}
+  .av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--marble) center/260px;border:1px solid var(--gold);font-family:var(--serif);font-size:17px;color:var(--gold-deep);flex:none}
+  .who b{display:block;font-weight:600;font-size:14.5px;text-align:left}
+  .who small{display:block;color:var(--faint);font-size:12.5px;text-align:left}
+  .tqs{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  @media (max-width:820px){.tqs{grid-template-columns:1fr}}
+  .tq{position:relative;background:#fff;border:1px solid var(--line);padding:42px 38px 34px;transition:.4s}
+  .tq::before{content:"\201C";position:absolute;top:8px;left:28px;font-family:var(--serif);font-size:80px;color:var(--gold-2);line-height:1}
+  .tq:hover{transform:translateY(-5px);box-shadow:0 30px 60px -32px rgba(30,25,15,.3);border-color:var(--gold-2)}
+  .tq p{font-family:var(--serif);font-size:20px;line-height:1.55;color:#2a2825;margin-top:14px}
+  .tq-more{text-align:center;margin-top:44px}
+
+  /* contact */
+  .contact{text-align:center;padding:140px 0;background:var(--marble) center/cover}
+  .contact::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(255,255,255,.95) 30%,rgba(255,255,255,.7) 100%)}
+  .contact .wrap{position:relative}
+  .contact h2{font-size:clamp(46px,7vw,92px);margin:18px auto 22px;max-width:14ch}
+  .contact p{color:var(--soft);font-weight:300;max-width:50ch;margin:0 auto}
+  .contact .ctas{justify-content:center}
+  .copyhint{margin-top:18px;font-size:13px;color:var(--faint);min-height:20px}
+  footer{background:var(--ink);color:rgba(255,255,255,.55);font-size:12.5px;letter-spacing:.08em}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:28px;padding-bottom:28px}
+  footer a:hover{color:var(--gold-2)}
+
+  /* reveal */
+  .r{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .r.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="wrap">
+  <a class="mono" href="#top"><i>MA</i><b>Manar Altumah</b></a>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#recommendations">Reviews</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+  </ul>
+  <a class="navbtn" href="#contact">Let's talk</a>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="r">
+    <p class="kicker">Portfolio · 2026</p>
+    <h1>Manar <em>Altumah</em></h1>
+    <p class="role">Software Developer · Data Engineer · AI Implementation</p>
+    <p class="lede">I design and build complete digital products for real businesses, from the database and internal tools to the brand and the website clients see. I'm an Honours Computer Science (Data Engineering) student at Sheridan College, an Implementation Engineer on voice AI for healthcare clinics, and a Research Assistant at Sheridan's Centre for Applied AI.</p>
+    <div class="ctas">
+      <a class="btn dark" href="#work">View my work →</a>
+      <a class="btn" href="#contact">Work with me</a>
+    </div>
+  </div>
+  <div class="portrait r">
+    <div class="arch"><img src="photo.jpg" alt="Portrait of Manar Altumah"></div>
+  </div>
+</div></header>
+
+<div class="stats"><div class="wrap">
+  <div><b>2</b><span>Live client sites</span></div>
+  <div><b>1st</b><span>TechBiz Case Cycle</span></div>
+  <div><b>4+</b><span>Years in tech support</span></div>
+  <div><b>4</b><span>Languages spoken</span></div>
+</div></div>
+
+<!-- WORK -->
+<section id="work"><div class="wrap">
+  <div class="head r">
+    <div><span class="num">01 —</span><h2>Selected <em>work</em></h2></div>
+    <p>Real products, live today. Click any project to visit the site.</p>
+  </div>
+
+  <article class="feature r">
+    <a class="shot" href="https://eyleaexchange.com" target="_blank" rel="noopener">
+      <div class="browser">
+        <div class="bar"><i></i><i></i><i></i><span>eyleaexchange.com</span></div>
+        <img src="eylea.jpg" alt="Eylea Exchange website homepage">
+      </div>
+      <div class="hint"><em>Visit live site ↗</em></div>
+    </a>
+    <div>
+      <p class="meta">Mar – Sep 2026 · Solo build · Live</p>
+      <h3>Eylea Exchange</h3>
+      <p>A complete digital system for a licensed currency exchange and money transfer business in Mississauga, ON. I built the brand, the website and the internal software the team uses every day, and the site credits me as designer and developer.</p>
+      <ul class="points">
+        <li><b>Business management system:</b> Electron + React desktop app with a Node.js backend and SQLite, plus a Supabase-backed web version</li>
+        <li><b>Receipts &amp; records:</b> generate, print, copy and reprint receipts, with customer records, reporting and backup/restore</li>
+        <li><b>Website:</b> responsive site with a custom domain and DNS, deployed on Netlify, plus Google Business Profile and business email</li>
+        <li><b>Brand:</b> logo, signage and marketing materials</li>
+      </ul>
+      <div class="tags"><span>Electron</span><span>React</span><span>Node.js</span><span>SQLite</span><span>Supabase</span><span>Netlify</span></div>
+      <a class="btn gold" href="https://eyleaexchange.com" target="_blank" rel="noopener">Visit eyleaexchange.com ↗</a>
+    </div>
+  </article>
+
+  <article class="feature r">
+    <a class="shot" href="https://drmoe.netlify.app/" target="_blank" rel="noopener">
+      <div class="browser">
+        <div class="bar"><i></i><i></i><i></i><span>drmoe.netlify.app</span></div>
+        <img src="drmoe.jpg" alt="Dr. Moe Medical Esthetics website homepage">
+      </div>
+      <div class="hint"><em>Visit live site ↗</em></div>
+    </a>
+    <div>
+      <p class="meta">Client website · Live</p>
+      <h3>Dr. Moe Medical Esthetics</h3>
+      <p>A luxury website for a medical esthetics studio in Windsor, ON. It has a treatment menu with prices, a step-by-step visit guide and the founder's story, and clients can book online and leave reviews.</p>
+      <ul class="points">
+        <li><b>Online booking:</b> treatment, date and time preferences, an optional female-esthetician request, and a built-in deposit policy</li>
+        <li><b>Reviews &amp; FAQ:</b> client reviews with a submission form, plus answers on payments and cancellations</li>
+        <li><b>Contact:</b> phone, WhatsApp, email and Instagram, set up for traffic from the studio's Instagram link in bio</li>
+      </ul>
+      <div class="tags"><span>Web design</span><span>Responsive UI</span><span>Booking forms</span><span>Netlify</span></div>
+      <a class="btn gold" href="https://drmoe.netlify.app/" target="_blank" rel="noopener">Visit drmoe.netlify.app ↗</a>
+    </div>
+  </article>
+
+  <article class="feature r bridge-feat">
+    <div class="phones">
+      <div class="phone p1"><img src="g/bridge-people.jpg" alt="Bridge app: People screen"></div>
+      <div class="phone p2"><img src="g/bridge-ask.jpg" alt="Bridge app: Ask your network screen"></div>
+      <div class="phone p3"><img src="g/bridge-intros.jpg" alt="Bridge app: Intros screen"></div>
+    </div>
+    <div>
+      <p class="meta">In development · My own product · Mobile app</p>
+      <h3>Bridge</h3>
+      <p>LinkedIn tells you who's connected. Bridge tells you who actually knows them. It's a mobile app for remembering the people you meet in real life and reaching new people through friends who know them.</p>
+      <ul class="points">
+        <li><b>Capture in 10 seconds:</b> scan a LinkedIn QR code and record a voice note in English or Arabic. AI turns it into a contact card.</li>
+        <li><b>Ask your network:</b> "Who can I talk to about data engineering in Toronto?" Bridge finds the best path, such as You → Maryam → Ahmed.</li>
+        <li><b>Warm intros with consent:</b> your friend chooses whether to make the introduction.</li>
+        <li><b>Privacy by design:</b> Postgres Row Level Security, opt-in sharing, and AI keys kept on the server.</li>
+      </ul>
+      <div class="tags"><span>React Native</span><span>Expo</span><span>TypeScript</span><span>Supabase</span><span>AI</span></div>
+      <a class="btn gold" href="https://bridge-app-demo.netlify.app" target="_blank" rel="noopener">Try the live demo ↗</a>
+      <p style="margin-top:12px;font-size:13px;color:var(--faint)">🔒 Source code is private · demo uses sample data, no sign-up needed</p>
+    </div>
+  </article>
+
+  <div class="cards">
+    <div class="card r">
+      <span class="trophy">1st place</span>
+      <p class="meta">Nov 2025 · Sheridan TechBiz</p>
+      <h4>Case Study Cycle: Data Analytics &amp; Cloud</h4>
+      <p>My team analyzed a real business problem, evaluated the data and designed a data-driven solution. We pitched it to industry judges and won first place for creativity, analytical approach and teamwork.</p>
+      <div class="tags"><span>Data analysis</span><span>Cloud</span><span>Pitching</span></div>
+    </div>
+    <div class="card r">
+      <p class="meta">Sheridan Datathon 2025</p>
+      <h4>MindGauge</h4>
+      <p>A data-driven analytics project built with a multidisciplinary team at Sheridan Datathon 2025, focused on solving a real-world problem.</p>
+      <div class="tags"><span>Data analytics</span><span>Python</span><span>Teamwork</span></div>
+      <a class="link" href="https://github.com/manar-altumah22" target="_blank" rel="noopener">View on GitHub ↗</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="alt"><div class="wrap">
+  <div class="head r">
+    <div><span class="num">02 —</span><h2>Experience</h2></div>
+    <p>From customer-facing tech support to building and launching AI systems.</p>
+  </div>
+  <div class="xp">
+    <div class="x r"><div class="when">Sep 2026 — Present</div>
+      <div><h4>Research Assistant</h4><p class="org">Sheridan College · Centre for Applied AI</p></div>
+      <p>Full-stack and AI development on applied research projects.</p></div>
+    <div class="x r"><div class="when">Jul 2026 — Present</div>
+      <div><h4>Implementation Engineer</h4><p class="org">Voice AI · Healthcare &amp; dental clinics</p></div>
+      <ul><li>Configure and test clinic integrations for launch readiness</li><li>Run QA test calls to validate booking flows end to end</li><li>Build test case workbooks, QA trackers and SOPs</li><li>Vapi, GoHighLevel, ClearDent, ScreenConnect</li></ul></div>
+    <div class="x r"><div class="when">Sep — Nov 2026</div>
+      <div><h4>Creative Design Lead</h4><p class="org">Sheridan Finance Club</p></div>
+      <p>Led the club's visual brand: event graphics, social campaigns, presentations and promotional materials.</p></div>
+    <div class="x r"><div class="when">Mar — Jul 2026</div>
+      <div><h4>Assistant Manager, Technical &amp; Operations</h4><p class="org">Eylea Exchange</p></div>
+      <p>Built the company's brand, website and internal management system, and ran its technical systems and digital assets.</p></div>
+    <div class="x r"><div class="when">Dec 2021 — May 2025</div>
+      <div><h4>Customer Solutions Specialist</h4><p class="org">Rogers Communications</p></div>
+      <p>Troubleshot wireless, internet and account issues in CRM/ICM systems and investigated complex cases with technical teams, while meeting quality targets at high volume.</p></div>
+    <div class="x r"><div class="when">Jan 2022 — May 2025</div>
+      <div><h4>Technical Support Management Specialist</h4><p class="org">HGS</p></div>
+      <p>Resolved escalated customer issues and kept customers through tailored solutions and negotiation.</p></div>
+    <div class="x r"><div class="when">Dec 2023 — May 2025</div>
+      <div><h4>Technical Support Staff</h4><p class="org">Fido Mobile</p></div>
+      <p>Diagnosed and repaired hardware and software issues and provided IT support.</p></div>
+  </div>
+</div></section>
+
+<!-- TESTIMONIALS -->
+<section id="recommendations" class="veined"><div class="wrap">
+  <div class="head r">
+    <div><span class="num">03 —</span><h2>Kind <em>words</em></h2></div>
+    <p>Recommendations from managers, professors and teammates, as posted on my LinkedIn.</p>
+  </div>
+
+  <div class="tq-feature r">
+    <span class="mk">&ldquo;</span>
+    <blockquote>What makes Manar stand out is her combination of technical curiosity, attention to detail, and genuine commitment to delivering an exceptional customer experience.</blockquote>
+    <div class="who"><span class="av">SG</span><div><b>Saher Ghattas</b><small>SVP / CRO · Managed Manar directly</small></div></div>
+  </div>
+
+  <div class="tqs">
+    <div class="tq r"><p>She completed her work on time and handled day-to-day tasks in a professional, steady way. When something was blocked or unclear, she raised it early and kept the team informed. I recommend Manar for software and data-focused roles.</p>
+      <div class="who"><span class="av">PM</span><div><b>Prabal Manchanda</b><small>Software Developer, AI &amp; ML · Managed Manar directly</small></div></div></div>
+    <div class="tq r"><p>What stood out to me was how carefully she worked&hellip; I would recommend Manar to any team looking for a careful, committed developer who takes ownership of her work.</p>
+      <div class="who"><span class="av">MM</span><div><b>Mark Meritt Jr.</b><small>Professor, Software Entrepreneurship · Sheridan College</small></div></div></div>
+    <div class="tq r"><p>Manar brings a wonderful blend of technical and interpersonal strengths to the table&hellip; Her analytical mindset allows her to break down complex technical challenges efficiently.</p>
+      <div class="who"><span class="av">MC</span><div><b>Mubarak Chaudhry</b><small>Director of Technology · Senior colleague</small></div></div></div>
+    <div class="tq r"><p>She is not only hardworking and responsible but also genuinely kind, supportive, and easy to work with. I'm confident she will be a great addition to any team.</p>
+      <div class="who"><span class="av">HS</span><div><b>Harshprabhleen Singh</b><small>Student Service Associate, Sheridan College · Studied together</small></div></div></div>
+  </div>
+  <div class="tq-more r"><a class="link" href="https://www.linkedin.com/in/manar-a-4b776030a/details/recommendations/" target="_blank" rel="noopener">Read all recommendations on LinkedIn ↗</a></div>
+</div></section>
+
+<!-- SKILLS -->
+<section id="skills"><div class="wrap">
+  <div class="head r">
+    <div><span class="num">04 —</span><h2>Skills &amp; <em>tools</em></h2></div>
+  </div>
+  <div class="skills r">
+    <div class="skill"><h5>Languages</h5><p>Java · Python · C · C# · SQL · JavaScript · HTML/CSS</p></div>
+    <div class="skill"><h5>Frameworks</h5><p>React · React Native · Next.js · Node.js · Electron · Spring Boot · Android</p></div>
+    <div class="skill"><h5>Cloud &amp; Data</h5><p>AWS · Azure · Firebase · Supabase · SQLite · Netlify · DNS</p></div>
+    <div class="skill"><h5>AI &amp; Quality</h5><p>Voice AI (Vapi) · Systems integration · Test design · QA · Documentation</p></div>
+    <div class="skill"><h5>Design</h5><p>UI/UX · Branding · Adobe CC · Canva · CapCut · Photography</p></div>
+    <div class="skill"><h5>I speak</h5><p>English · Arabic · Turkish (conversational) · French (basic)</p></div>
+  </div>
+</div></section>
+
+<!-- CREDENTIALS -->
+<section id="credentials" class="veined"><div class="wrap">
+  <div class="head r">
+    <div><span class="num">05 —</span><h2>Education &amp; <em>credentials</em></h2></div>
+  </div>
+  <div class="creds">
+    <div class="r">
+      <h3>Education</h3>
+      <ul class="cl">
+        <li><div><b>Honours Bachelor of Computer Science, Data Engineering</b><small>Sheridan College</small></div><em>2026 – 2028</em></li>
+        <li><div><b>Advanced Diploma, Software Development &amp; Network Engineering</b><small>Sheridan College · Computer Systems Technology</small></div><em>2023 – 2026</em></li>
+        <li><div><b>Faculty recommendations</b><small>Prof. Meharban Sidhique · Prof. Wael Channaa, available on request</small></div><em>Letters</em></li>
+      </ul>
+    </div>
+    <div class="r">
+      <h3>Certifications</h3>
+      <ul class="cl">
+        <li><div><b>TCPS 2: CORE 2022, Research Ethics</b><small>Government of Canada</small></div><em>Sep 2026</em></li>
+        <li><div><b>Career Catalyst Portfolio</b><small>Sheridan Works · Sheridan College</small></div><em>Sep 2026</em></li>
+        <li><div><b>Intermediate First Aid, CPR C</b><small>St. John Ambulance</small></div><em>Aug 2026</em></li>
+        <li><div><b>Business Model Canvas Workshop</b><small>Sheridan EDGE</small></div><em>Oct 2025</em></li>
+        <li><div><b>AdvocART on Campus, Participation</b><small>Sheridan Student Union</small></div><em>Nov 2025</em></li>
+        <li><div><b>Real Estate &amp; Mortgage Institute of Canada</b><small>REMIC</small></div><em>Dec 2022</em></li>
+        <li><div><b>Research Skills Tutorial</b><small>Laurentian University</small></div><em>Oct 2022</em></li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<!-- VOLUNTEERING -->
+<section id="volunteering" class="alt"><div class="wrap">
+  <div class="head r">
+    <div><span class="num">06 —</span><h2>Leadership &amp; <em>community</em></h2></div>
+  </div>
+  <div class="vol">
+    <div class="v r"><p class="meta">Sep 2026 — Present</p><h4>Student Mentor</h4><p class="org">Leadership Bridge Program · Sheridan</p><p>Selected for a reverse-mentoring program that connects students with Sheridan staff and faculty.</p></div>
+    <div class="v r"><p class="meta">Sep 2026</p><h4>Orientation Volunteer</h4><p class="org">Double Blue Crew · Sheridan</p><p>Welcomed and guided new first-year students during New Student Orientation.</p></div>
+    <div class="v r"><p class="meta">Dec 2025</p><h4>Event Volunteer</h4><p class="org">Idea Validation Lab v.4 · Sheridan EDGE</p><p>Ran registration and check-in, kept records in Excel and supported event logistics.</p></div>
+    <div class="v r"><p class="meta">Nov 2025</p><h4>DevFest 2025 Volunteer</h4><p class="org">GDG Mississauga</p><p>Supported operations and attendee engagement at a developer event on Google Cloud and AI.</p></div>
+    <div class="v r"><p class="meta">Oct — Nov 2025</p><h4>Event Volunteer</h4><p class="org">Sheridan Datathon · SSU AGM · AdvocART</p><p>Coordination and attendee support across student union and campus tech events.</p></div>
+    <div class="v r"><p class="meta">Ongoing</p><h4>Ambassador &amp; Member</h4><p class="org">IBM SkillsBuild · GDG · AWS Club · TechBiz</p><p>IBM SkillsBuild Student Ambassador, and an active member of Sheridan's tech clubs.</p></div>
+  </div>
+</div></section>
+
+<!-- BEYOND -->
+<section id="beyond"><div class="wrap">
+  <div class="head r">
+    <div><span class="num">07 —</span><h2>Beyond the <em>code</em></h2></div>
+    <p>What keeps me grounded, curious and creative outside of work.</p>
+  </div>
+  <div class="hob2">
+    <div class="hcard r">
+      <div class="ph"><img src="g/horse.jpg" alt="Manar horse riding at sunset in Oakville, Ontario"></div>
+      <div class="tx"><span class="ic">i.</span><h4>Horse riding</h4><p>I love horses and riding. It takes patience, focus and trust, and I bring the same things to my work.</p></div>
+    </div>
+    <div class="side">
+      <div class="h r"><span class="ic">ii.</span><h4>Photography</h4><p>Photography trained my eye for light, composition and detail, and that shows up in every interface I design.</p></div>
+      <div class="h r"><span class="ic">iii.</span><h4>Design &amp; content</h4><p>I make brand visuals and short-form content in Adobe Creative Cloud, Canva and CapCut.</p></div>
+    </div>
+  </div>
+
+  <div class="gal-head r">
+    <h3>Moments &amp; <em>community</em></h3>
+    <p>Tap a photo to view it larger.</p>
+  </div>
+  <div class="gal">
+    <figure class="gi r"><img src="g/neon.jpg" alt="Manar at her coding desk"><figcaption>In my element<span>Code · Debug · Deploy</span></figcaption></figure>
+    <figure class="gi r"><img src="g/techbiz.jpg" alt="Sheridan TechBiz Case Closed group photo"><figcaption>Case Closed with TechBiz<span>Sheridan</span></figcaption></figure>
+    <figure class="gi r"><img src="g/campus.jpg" alt="Manar at Sheridan College"><figcaption>Sheridan College<span>Home base</span></figcaption></figure>
+    <figure class="gi r"><img src="g/lab.jpg" alt="Manar working with a team at laptops"><figcaption>Heads-down, building<span>Teamwork</span></figcaption></figure>
+    <figure class="gi r"><img src="g/finance.jpg" alt="Sheridan Finance Club event group photo"><figcaption>Sheridan Finance Club<span>Event · 2026</span></figcaption></figure>
+  </div>
+</div></section>
+<div class="lb" id="lb"><div><img id="lbimg" alt=""><p id="lbcap"></p></div></div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact"><div class="wrap r">
+  <p class="kicker" style="justify-content:center">Let's build something</p>
+  <h2>Have a project in <em>mind?</em></h2>
+  <p>I'm open to freelance websites, internships, co-ops and hackathon teams. Send me a message and I'll get back to you.</p>
+  <div class="ctas">
+    <a class="btn dark" href="mailto:altumahmanar@gmail.com">altumahmanar@gmail.com</a>
+    <button class="btn" id="copy">Copy email</button>
+    <a class="btn gold" href="https://wa.me/14315471173?text=Hi%20Manar%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg> WhatsApp</a>
+    <a class="btn" href="https://www.linkedin.com/in/manar-a-4b776030a" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="btn" href="https://github.com/manar-altumah22" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+  <p class="copyhint" id="hint"></p>
+  <p class="copyhint">WhatsApp: +1 (431) 547-1173</p>
+</div></section>
+
+<a class="fab" href="https://wa.me/14315471173?text=Hi%20Manar%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z"/></svg><span>WhatsApp</span></a>
+<footer><div class="wrap">
+  <span style="display:flex;align-items:center;gap:10px">© 2026 Manar Altumah · Oakville, Ontario</span>
+  <span>Designed &amp; developed by Manar Altumah</span>
+</div></footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',scrollY>30);
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.r').forEach(el=>io.observe(el));
+  document.getElementById('copy').addEventListener('click',async()=>{
+    const h=document.getElementById('hint');
+    try{await navigator.clipboard.writeText('altumahmanar@gmail.com');h.textContent='Email copied to clipboard.'}
+    catch(e){h.textContent='altumahmanar@gmail.com'}
+  });
+  const lb=document.getElementById('lb'),lbi=document.getElementById('lbimg'),lbc=document.getElementById('lbcap');
+  document.querySelectorAll('.gi').forEach(f=>f.addEventListener('click',()=>{lbi.src=f.querySelector('img').src;lbi.alt=f.querySelector('img').alt;lbc.textContent=f.querySelector('figcaption').firstChild.textContent;lb.classList.add('on')}));
+  lb.addEventListener('click',()=>lb.classList.remove('on'));
+  addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+</script>
+</body>
+</html>
